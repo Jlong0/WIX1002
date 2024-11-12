@@ -84,6 +84,7 @@ public class V1Q4 {
                             default:
                                 System.out.println("Wrong Input");
                         }
+                        System.out.println("Current Total: RM" + totalPrice);
                         System.out.println("--------------------------------");
                         break;
                     case 2:
@@ -123,6 +124,7 @@ public class V1Q4 {
                             default:
                                 System.out.println("Wrong Input");
                         }
+                        System.out.println("Current Total: RM" + totalPrice);
                         System.out.println("--------------------------------");
                         break;
                         
@@ -163,6 +165,7 @@ public class V1Q4 {
                             default:
                                 System.out.println("Wrong Input");
                         }
+                        System.out.println("Current Total: RM" + totalPrice);
                         System.out.println("--------------------------------");
                         break;         
                 }
