@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package v1q3;
-
+import java.util.Scanner;
 /**
  *
  * @author jirui
@@ -14,7 +14,11 @@ public class V1Q3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int num = 96 , checkPrime = 0, sum = 0, product = 1, max = Integer.MAX_VALUE;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int num = sc.nextInt();
+        
+        int checkPrime = 0, sum = 0, product = 1, max = Integer.MAX_VALUE;
         boolean tooLarge = false;
         System.out.print("The factors are: ");
         for(int x = 1; x<=num; x++){
@@ -52,7 +56,7 @@ public class V1Q3 {
             System.out.println("The product of the factors is " + product);
         }
         
-        if(num % Math.sqrt(num) == 0){
+        if(sum - num == num){
             System.out.println(num + " is a prefect number.");
         }
         else{
