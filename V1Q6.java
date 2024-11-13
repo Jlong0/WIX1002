@@ -18,15 +18,18 @@ public class V1Q6 {
         boolean checkNegative = false;
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter score: ");
+        
+        //This is for the first number entered.
         highestNum = sc.nextInt();
         highestCount++;
-        sum =+ highestNum;
+        sum += highestNum;
+        
         while(true){
             temp = sc.nextInt();
             
             sum += temp;
             if(temp == 0){
-                    break;
+                break;
             }
             else if(temp == highestNum){
                 highestCount++;
@@ -34,6 +37,9 @@ public class V1Q6 {
             else if(temp == secondHighNum){
                 secondHighCount++;
             }
+            
+            //If new numer is largest, we replace highestNum with the new number, and the previous highestNum becomes the secondHighNum.
+            //the occurrence of the previous highestCount is transfered to the secondHighCount while the new highestCount = 1(first occurrence).
             else if(temp > highestNum){
                 
                 secondHighNum = highestNum;
@@ -42,6 +48,8 @@ public class V1Q6 {
                 highestCount = 1;
                 
             }
+            
+            //This is when new number is larger than secondhighest and smaller than highest
             else if(temp < highestNum && temp > secondHighNum){
                 
                 secondHighNum = temp;

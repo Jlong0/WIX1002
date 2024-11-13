@@ -57,7 +57,7 @@ public class V1Q3 {
         }
         
         if(sum - num == num){
-            System.out.println(num + " is a prefect number.");
+            System.out.println(num + " is a perfect number.");
         }
         else{
             System.out.println(num + " is not a perfect number.");
