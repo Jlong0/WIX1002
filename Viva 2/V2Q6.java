@@ -4,6 +4,7 @@
  */
 package v2q6;
 import java.util.Scanner;
+
 /**
  *
  * @author jirui
@@ -13,6 +14,7 @@ public class V2Q6 {
     /**
      * @param args the command line arguments
      */
+    static boolean hour12 = true, hour24 = true;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter name:");
@@ -27,7 +29,7 @@ public class V2Q6 {
         System.out.println("");
         System.out.println("+".repeat(60));
         isPrintingWelcomeMessage(name);
-        if(timeInterval[0]<6){
+        if(firstInterval[0] >= 0 && lastInterval[0] < 6){
             System.out.println("SLEEP NOW!!!!!!!!!!");
         }
         System.out.printf("%02d:%02d:%02d\n", timeInterval[0], timeInterval[1], timeInterval[2]);
@@ -36,15 +38,68 @@ public class V2Q6 {
     
     public static int[] timeInput(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter interval:");
+        System.out.print("Enter interval ( In hh:mm:ss (am/pm) )\nIf am/pm is not inputted then the system recognises it as 24-hour format:");
         String interval = sc.nextLine();
-        boolean format = false;
+        boolean format = false; 
         int[] time = new int[3];
         while(true){ 
-            if(!interval.matches("..:..:..")){
-                System.out.println("Error, try again");
+            if(interval.matches("..:..:.. (am|pm)") && hour12){
+                boolean isPM = false;
+                if(interval.matches("..:..:.. pm")){
+                    isPM = true;
+                }
+                hour24 = false;
+                String tempStr = "";
+                for(int x = 0, y = 1; x<interval.length(); x++, y++){
+                    tempStr += interval.charAt(x);
+                    if(y == 2){
+                        int tempInt = Integer.parseInt(tempStr);
+                        if(tempInt >= 1 && tempInt <=12){
+                            time[0] = tempInt;
+                            if(isPM && time[0] != 12){
+                                time[0] += 12;
+                            }
+                            else if(!isPM && time[0] == 12){
+                                
+                                time[0] -= 12;
+                            }
+                        }
+                        else{
+                            System.out.println("hour is incorrect");
+                            break;
+                        }
+                        tempStr = "";
+                        x++;
+                    }
+                    else if(y == 4){
+                        int tempInt = Integer.parseInt(tempStr);
+                        if(tempInt >= 0 && tempInt <=59){
+                            time[1] = tempInt;
+                        }
+                        else{
+                            System.out.println("minute is incorrect");
+                            break;
+                        }
+                        tempStr = "";
+                        x++;
+                    }
+                    else if(y == 6){
+                        int tempInt = Integer.parseInt(tempStr);
+                        if(tempInt >= 0 && tempInt <=59){
+                            time[2] = tempInt;
+                            format = true;
+                        }
+                        else{
+                            System.out.println("second is incorrect");
+                            break;
+                        }
+                        
+                    }
+                    
+                }
             }
-            else{
+            else if(interval.matches("..:..:..") && hour24){
+                hour12 = false;
                 String tempStr = "";
                 for(int x = 0, y = 1; x<interval.length(); x++, y++){
                     tempStr += interval.charAt(x);
@@ -87,10 +142,13 @@ public class V2Q6 {
                     
                 }
             }
+            else{
+                System.out.println("Error, try again");
+            }
             if(format){
                 return time;
             }
-            System.out.println("Enter interval:");
+            System.out.print("Enter interval ( In hh:mm:ss (am/pm) )\nIf am/pm is not inputted then the system recognises it as 24-hour format:");
             interval = sc.nextLine();
             
         }
@@ -137,11 +195,12 @@ public class V2Q6 {
         name = name.toLowerCase();
         if(name.contains("lee") && name.contains("kah") && name.contains("sing")){
             System.out.println("Welcome to G101, Kolej Kediaman Kinabalu, Universiti Malaya!");
-            System.out.println(generateInitials(name) + "!!!!!!!!!!");
             if(name.charAt(0) == 'k' || name.charAt(0) == 's'){
+                System.out.println("LKS" + "!!!!!!!!!!");
                 System.out.println("WE KNOW IT'S YOU -- LEE KAH SING!");
             }
             else if(name.charAt(0) == 'l'){
+                System.out.println(generateInitials(name) + "!!!!!!!!!!");
                 System.out.println("WE KNOW IT'S YOU!");
             }
         }
